@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحويل القياسات - مليمتر إلى بيكسل</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        header {
+            background: #6a11cb;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .conversion-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .explanation {
+            flex: 1;
+            min-width: 300px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .explanation h2 {
+            color: #6a11cb;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #6a11cb;
+            padding-bottom: 10px;
+        }
+        
+        .calculator {
+            flex: 1;
+            min-width: 300px;
+            background: #f0f7ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .calculator h2 {
+            color: #2575fc;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #2575fc;
+            padding-bottom: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .input-group input:focus {
+            border-color: #6a11cb;
+            outline: none;
+        }
+        
+        .btn {
+            background: #6a11cb;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background: #2575fc;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e6f7ff;
+            border-radius: 5px;
+            border-left: 4px solid #2575fc;
+        }
+        
+        .examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .example {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .example h3 {
+            color: #6a11cb;
+            margin-bottom: 15px;
+        }
+        
+        .example p {
+            margin-bottom: 10px;
+        }
+        
+        .dpi-explanation {
+            background: #fff4e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #ffa94d;
+        }
+        
+        .dpi-explanation h3 {
+            color: #e67700;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f0f0f0;
+            color: #666;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .conversion-section {
+                flex-direction: column;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>تحويل القياسات من المليمتر إلى البيكسل</h1>
+            <p>أداة بسيطة لتحويل الأبعاد من مليمتر إلى بيكسل مع أمثلة عملية للتصميم والطباعة</p>
+        </header>
+        
+        <div class="content">
+            <div class="conversion-section">
+                <div class="explanation">
+                    <h2>كيفية التحويل من مليمتر إلى بيكسل</h2>
+                    <p>التحويل من مليمتر إلى بيكسل يعتمد على دقة الصورة (DPI) والتي تعني عدد النقاط في البوصة الواحدة.</p>
+                    <p>معادلة التحويل:</p>
+                    <p><strong>البيكسل = (المليمتر × DPI) ÷ 25.4</strong></p>
+                    <p>حيث أن 1 بوصة = 25.4 مليمتر</p>
+                    <p>القياسات الشائعة لـ DPI:</p>
+                    <ul>
+                        <li>72 DPI: للعرض على الشاشات فقط</li>
+                        <li>150 DPI: للعرض على الشاشات والطباعة العادية</li>
+                        <li>300 DPI: للطباعة عالية الجودة</li>
+                    </ul>
+                </div>
+                
+                <div class="calculator">
+                    <h2>حاسبة التحويل</h2>
+                    <div class="input-group">
+                        <label for="width-mm">العرض بالمليمتر</label>
+                        <input type="number" id="width-mm" value="215.9" step="0.1">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="height-mm">الارتفاع بالمليمتر</label>
+                        <input type="number" id="height-mm" value="279.4" step="0.1">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="dpi">الدقة (DPI)</label>
+                        <input type="number" id="dpi" value="300" min="72" max="600">
+                    </div>
+                    
+                    <button class="btn" onclick="calculatePixels()">تحويل إلى بيكسل</button>
+                    
+                    <div class="result" id="result">
+                        <p>النتيجة ستظهر هنا بعد الضغط على زر التحويل</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dpi-explanation">
+                <h3>ما هو DPI ولماذا هو مهم؟</h3>
+                <p>DPI (نقاط في البوصة) هو مقياس لكثافة النقاط في مساحة معينة. كلما زادت قيمة DPI، زادت دقة ووضوح الصورة عند الطباعة.</p>
+                <p>للعرض على الشاشات فقط، 72 DPI كافية. ولكن للطباعة، تحتاج إلى 300 DPI على الأقل للحصول على جودة عالية.</p>
+            </div>
+            
+            <div class="examples">
+                <div class="example">
+                    <h3>مثال: 215.9 × 279.4 ملم بدقة 300 DPI</h3>
+                    <p>العرض: (215.9 × 300) ÷ 25.4 = <strong>2550 بيكسل</strong></p>
+                    <p>الارتفاع: (279.4 × 300) ÷ 25.4 = <strong>3300 بيكسل</strong></p>
+                    <p>هذا هو الحجم الأمريكي القياسي للورق (Letter Size) وهو مناسب للطباعة.</p>
+                </div>
+                
+                <div class="example">
+                    <h3>مثال: 215.9 × 279.4 ملم بدقة 150 DPI</h3>
+                    <p>العرض: (215.9 × 150) ÷ 25.4 = <strong>1275 بيكسل</strong></p>
+                    <p>الارتفاع: (279.4 × 150) ÷ 25.4 = <strong>1650 بيكسل</strong></p>
+                    <p>هذا الحجم مناسب للعرض على الشاشات والطباعة العادية.</p>
+                </div>
+                
+                <div class="example">
+                    <h3>مثال: 215.9 × 279.4 ملم بدقة 72 DPI</h3>
+                    <p>العرض: (215.9 × 72) ÷ 25.4 = <strong>612 بيكسل</strong></p>
+                    <p>الارتفاع: (279.4 × 72) ÷ 25.4 = <strong>792 بيكسل</strong></p>
+                    <p>هذا الحجم مناسب للعرض على الشاشات فقط وليس للطباعة.</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 أداة تحويل القياسات | تم التصميم خصيصاً لمساعدتك في تحويل القياسات بسهولة</p>
+        </footer>
+    </div>
+
+    <script>
+        function calculatePixels() {
+            const widthMM = parseFloat(document.getElementById('width-mm').value);
+            const heightMM = parseFloat(document.getElementById('height-mm').value);
+            const dpi = parseFloat(document.getElementById('dpi').value);
+            
+            if (isNaN(widthMM) || isNaN(heightMM) || isNaN(dpi)) {
+                document.getElementById('result').innerHTML = '<p>الرجاء إدخال قيم صحيحة</p>';
+                return;
+            }
+            
+            const widthPixels = Math.round((widthMM * dpi) / 25.4);
+            const heightPixels = Math.round((heightMM * dpi) / 25.4);
+            
+            document.getElementById('result').innerHTML = `
+                <p><strong>النتيجة:</strong></p>
+                <p>العرض: ${widthPixels} بيكسل</p>
+                <p>الارتفاع: ${heightPixels} بيكسل</p>
+                <p>بالدقة: ${dpi} DPI</p>
+            `;
+        }
+        
+        // حساب تلقائي عند تحميل الصفحة
+        window.onload = calculatePixels;
+    </script>
+</body>
+</html>

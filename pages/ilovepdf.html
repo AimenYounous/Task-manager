@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPDF - جميع أدوات PDF في مكان واحد</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #ea4335;
+            --secondary: #4285f4;
+            --dark: #202124;
+            --light: #f8f9fa;
+            --gray: #5f6368;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo i {
+            font-size: 2.2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #d33426;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .hero-btn {
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .hero-btn-light {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .hero-btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .hero-btn-light:hover {
+            background: #f0f0f0;
+        }
+        
+        .hero-btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Tools Section */
+        .tools-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tool-icon {
+            width: 70px;
+            height: 70px;
+            background: #f0f7ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+        
+        .tool-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .tool-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .tool-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Features Section */
+        .features {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .feature p {
+            color: var(--gray);
+        }
+        
+        /* Upload Section */
+        .upload-section {
+            background: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 60px 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary);
+        }
+        
+        .upload-icon {
+            font-size: 4rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .upload-area h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .upload-area p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #bdc1c6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #3c4043;
+            color: #9aa0a6;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>iPDF</span>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#">جميع الأدوات</a></li>
+                        <li><a href="#">دمج PDF</a></li>
+                        <li><a href="#">تقسيم PDF</a></li>
+                        <li><a href="#">ضغط PDF</a></li>
+                        <li><a href="#">تحويل PDF</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="auth-buttons">
+                    <button class="btn btn-outline">تسجيل الدخول</button>
+                    <button class="btn btn-primary">إنشاء حساب</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>جميع أدوات PDF التي تحتاجها في مكان واحد</h1>
+            <p>iPDF يوفر لك مجموعة شاملة من الأدوات المجانية لتحرير ومعالجة ملفات PDF بسهولة وسرعة</p>
+            
+            <div class="hero-buttons">
+                <button class="hero-btn hero-btn-light">ابدأ الآن مجاناً</button>
+                <button class="hero-btn hero-btn-outline">تعرف على المزيد</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="tools-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>أدوات PDF الشائعة</h2>
+                <p>اختر من بين مجموعة واسعة من الأدوات المجانية لمعالجة ملفات PDF</p>
+            </div>
+            
+            <div class="tools-grid">
+                <!-- Tool 1 -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-object-group"></i>
+                    </div>
+                    <h3>دمج PDF</h3>
+                    <p>اجمع عدة ملفات PDF في ملف واحد بترتيب تختاره</p>
+                    <a href="#" class="tool-link">استخدم الأداة <i class="fas fa-arrow-left"></i></a>
+                </div>
+                
+                <!-- Tool 2 -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3>تقسيم PDF</h3>
+                    <p>قسّم ملف PDF إلى عدة ملفات أو استخرج صفحات محددة</p>
+                    <a href="#" class="tool-link">استخدم الأداة <i class="fas fa-arrow-left"></i></a>
+                </div>
+                
+                <!-- Tool 3 -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-compress-arrows-alt"></i>
+                    </div>
+                    <h3>ضغط PDF</h3>
+                    <p>قلص حجم ملف PDF دون التأثير بشكل كبير على الجودة</p>
+                    <a href="#" class="tool-link">استخدم الأداة <i class="fas fa-arrow-left"></i></a>
+                </div>
+                
+                <!-- Tool 4 -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>تحويل PDF</h3>
+                    <p>حوّل ملفات PDF إلى Word أو Excel أو PowerPoint والعكس</p>
+                    <a href="#" class="tool-link">استخدم الأداة <i class="fas fa-arrow-left"></i></a>
+                </div>
+                
+                <!-- Tool 5 -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>حماية PDF</h3>
+                    <p>حمّي ملف PDF بكلمة مرور لمنع الوصول غير المصرح به</p>
+                    <a href="#" class="tool-link">استخدم الأداة <i class="fas fa-arrow-left"></i></a>
+                </div>
+                
+                <!-- Tool 6 -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>تعديل PDF</h3>
+                    <p>عدّل نصًا أو صورًا في ملف PDF مباشرة من المتصفح</p>
+                    <a href="#" class="tool-link">استخدم الأداة <i class="fas fa-arrow-left"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>لماذا تختار iPDF؟</h2>
+                <p>نقدم لك أفضل تجربة لمعالجة ملفات PDF عبر الإنترنت</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>آمن ومحمي</h3>
+                    <p>جميع ملفاتك محمية وتتم معالجتها بشكل آمن. نحن نحترم خصوصيتك</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>سريع وسهل</h3>
+                    <p>أدواتنا سريعة وسهلة الاستخدام. لا حاجة لتنزيل أي برامج</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>يعمل بالسحابة</h3>
+                    <p>يمكنك الوصول إلى أدواتنا من أي جهاز وفي أي مكان</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section class="upload-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>ابدأ مع iPDF الآن</h2>
+                <p>اختر أداة أو ابدأ برفع ملف PDF لمعالجته</p>
+            </div>
+            
+            <div class="upload-area">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h3>اسحب وأفلت ملف PDF هنا</h3>
+                <p>أو <span style="color: var(--primary);">استعرض الملفات</span> من جهازك</p>
+                <p>الحد الأقصى لحجم الملف: 50 ميجابايت</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>iPDF</h4>
+                    <ul>
+                        <li><a href="#">عن iPDF</a></li>
+                        <li><a href="#">الأسعار</a></li>
+                        <li><a href="#">وظائف</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>أدوات PDF</h4>
+                    <ul>
+                        <li><a href="#">دمج PDF</a></li>
+                        <li><a href="#">تقسيم PDF</a></li>
+                        <li><a href="#">ضغط PDF</a></li>
+                        <li><a href="#">تحويل PDF</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>الدعم</h4>
+                    <ul>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">المساعدة</a></li>
+                        <li><a href="#">الشروط والأحكام</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>تابعنا</h4>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-twitter"></i> تويتر</a></li>
+                        <li><a href="#"><i class="fab fa-facebook"></i> فيسبوك</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> إنستغرام</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> لينكدإن</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 iPDF. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // إضافة تأثيرات تفاعلية بسيطة
+        document.addEventListener('DOMContentLoaded', function() {
+            // تأثير عند التمرير على بطاقات الأدوات
+            const toolCards = document.querySelectorAll('.tool-card');
+            
+            toolCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // تأثير عند النقر على زر الرفع
+            const uploadArea = document.querySelector('.upload-area');
+            
+            uploadArea.addEventListener('click', function() {
+                this.style.borderColor = 'var(--primary)';
+                this.style.backgroundColor = '#f9f9f9';
+                
+                setTimeout(() => {
+                    this.style.borderColor = '#ddd';
+                    this.style.backgroundColor = 'transparent';
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
